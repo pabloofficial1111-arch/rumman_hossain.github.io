@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +17,6 @@
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            base: '#090a0f',
-            card: '#11131c',
-            borderSubtle: 'rgba(255, 255, 255, 0.08)',
-            accentTeal: '#14b8a6',
-            accentEmerald: '#10b981',
           }
         }
       }
@@ -32,399 +25,331 @@
 
   <style>
     body {
-      background-color: #07080c;
+      background-color: #050609;
       color: #e2e8f0;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.08) 0%, transparent 60%),
         linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-      background-size: 100% 100%, 40px 40px, 40px 40px;
+      background-size: 100% 100%, 36px 36px, 36px 36px;
+      min-height: 100vh;
     }
 
-    .bento-card {
-      background: rgba(17, 19, 28, 0.75);
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .glass-card {
+      background: rgba(13, 16, 24, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(16px);
-      transition: all 0.25s ease-in-out;
     }
 
-    .bento-card:hover {
-      border-color: rgba(20, 184, 166, 0.35);
-      transform: translateY(-2px);
-    }
-
-    .floating-dock {
-      background: rgba(13, 15, 22, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    .nav-btn.active {
+      background-color: rgba(255, 255, 255, 0.12);
+      color: #14b8a6;
+      border: 1px solid rgba(20, 184, 166, 0.3);
     }
   </style>
 </head>
-<body class="font-sans antialiased selection:bg-teal-500 selection:text-black">
+<body class="font-sans antialiased flex flex-col justify-between selection:bg-teal-500 selection:text-black">
 
-  <!-- Floating Dock Header -->
+  <!-- Top Floating Dock Nav Bar -->
   <header class="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
-    <nav class="floating-dock rounded-full px-4 py-2 flex items-center gap-1.5 sm:gap-3 text-xs sm:text-sm font-medium">
-      <a href="#about" class="px-3 py-1.5 rounded-full hover:bg-white/10 text-slate-200 transition">About</a>
-      <a href="#experience" class="px-3 py-1.5 rounded-full hover:bg-white/10 text-slate-200 transition">Experience</a>
-      <a href="#credentials" class="px-3 py-1.5 rounded-full hover:bg-white/10 text-slate-200 transition">Education</a>
-      <a href="#skills" class="px-3 py-1.5 rounded-full hover:bg-white/10 text-slate-200 transition">Skills</a>
-      <a href="#contact" class="px-3 py-1.5 rounded-full hover:bg-white/10 text-slate-200 transition">Contact</a>
-      <div class="h-4 w-px bg-white/15 mx-1 hidden sm:block"></div>
+    <nav class="bg-black/75 backdrop-blur-xl border border-white/10 rounded-full p-1.5 flex items-center gap-1 sm:gap-2 shadow-2xl text-xs sm:text-sm font-medium">
+      <button onclick="switchTab('about')" id="btn-about" class="nav-btn active px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white transition-all">About</button>
+      <button onclick="switchTab('experience')" id="btn-experience" class="nav-btn px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white transition-all">Experience</button>
+      <button onclick="switchTab('education')" id="btn-education" class="nav-btn px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white transition-all">Education</button>
+      <button onclick="switchTab('skills')" id="btn-skills" class="nav-btn px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white transition-all">Skills</button>
+      <button onclick="switchTab('contact')" id="btn-contact" class="nav-btn px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white transition-all">Contact</button>
       
-      <!-- 1-Click Resume Download Button (Nav Bar) -->
-      <a href="resume.pdf" download="Md_Rumman_Hossain_Resume.pdf" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-500 hover:bg-teal-400 text-black font-semibold transition-all shadow-lg shadow-teal-500/20">
+      <div class="h-4 w-px bg-white/15 mx-1 hidden sm:block"></div>
+
+      <!-- 1-Click Resume Download Anchor -->
+      <a href="resume.pdf" download="Md_Rumman_Hossain_Resume.pdf" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-500 hover:bg-teal-400 text-black font-semibold transition-all">
         <i class="fa-solid fa-cloud-arrow-down text-xs"></i>
-        <span>Resume</span>
+        <span>CV</span>
       </a>
     </nav>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-32 pb-24 space-y-16">
+  <!-- Main Multi-Page Container -->
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 pt-28 pb-16 w-full flex-grow">
 
-    <!-- Hero Bento Card -->
-    <section id="about" class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
-      
-      <!-- Bio Container -->
-      <div class="md:col-span-8 bento-card p-7 sm:p-9 rounded-3xl flex flex-col justify-between">
-        <div class="space-y-4">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-400 text-xs font-mono">
-            <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
-            Trainee Executive @ WHOSWHO (HRaaS)
+    <!-- PAGE 1: ABOUT -->
+    <div id="tab-about" class="tab-content active space-y-6">
+      <div class="glass-card p-6 sm:p-8 rounded-3xl space-y-6">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-white/15 p-1 bg-white/5 flex-shrink-0">
+            <img 
+              src="profile.jpg" 
+              alt="MD. Rumman Hossain" 
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80';"
+              class="w-full h-full object-cover rounded-xl"
+            >
           </div>
-          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            MD. Rumman <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">Hossain</span>
-          </h1>
-          <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-            HR Operations professional and talent acquisition strategist with hands-on experience in full-cycle recruitment, executive headhunting, compliance, and employee lifecycle management across fast-moving organizations[cite: 1].
-          </p>
+          <div class="space-y-2 text-center sm:text-left flex-1">
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-400 text-xs font-mono">
+              <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+              WHOSWHO · HR Operations (HRaaS)
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white">MD. Rumman Hossain</h1>
+            <p class="text-xs font-mono text-slate-400">South Banasree, Dhaka, Bangladesh</p>
+          </div>
         </div>
 
-        <div class="pt-8 flex flex-wrap items-center gap-3">
-          <!-- 1-Click Download Button (Hero Section) -->
-          <a href="resume.pdf" download="Md_Rumman_Hossain_Resume.pdf" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-black font-semibold text-sm transition-all shadow-md shadow-teal-500/20">
-            <i class="fa-solid fa-file-arrow-down"></i> Download Resume
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          HR Operations professional and talent acquisition enthusiast with hands-on expertise in end-to-end recruitment, headhunting, policy administration, and employee lifecycle management across fast-paced corporate environments.
+        </p>
+
+        <!-- Quick Action Bar -->
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="resume.pdf" download="Md_Rumman_Hossain_Resume.pdf" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-black font-semibold text-xs sm:text-sm transition-all">
+            <i class="fa-solid fa-download"></i> Download Resume
           </a>
-          <!-- Direct WhatsApp Link -->
-          <a href="https://wa.me/8801711377620" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-sm transition-all">
-            <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Direct
+          <a href="https://wa.me/8801711377620" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 font-semibold text-xs sm:text-sm transition-all">
+            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
           </a>
-          <!-- Verified LinkedIn Profile Link -->
-          <a href="https://www.linkedin.com/in/rumman-hossain-bba2a71a2/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 text-sm transition-all">
+          <a href="https://www.linkedin.com/in/rumman-hossain-bba2a71a2/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 text-xs sm:text-sm transition-all">
             <i class="fa-brands fa-linkedin text-teal-400"></i> LinkedIn
           </a>
         </div>
       </div>
 
-      <!-- Avatar & Quick Info Card -->
-      <div class="md:col-span-4 bento-card p-6 rounded-3xl flex flex-col items-center justify-center text-center">
-        <div class="w-36 h-36 rounded-2xl overflow-hidden border border-white/15 p-1 bg-gradient-to-b from-teal-500/20 to-transparent mb-4 shadow-xl">
-          <img 
-            src="profile.jpg" 
-            alt="MD. Rumman Hossain" 
-            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80';"
-            class="w-full h-full object-cover rounded-xl"
-          >
+      <!-- Quick Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+        <div class="glass-card p-4 rounded-2xl">
+          <div class="text-xl font-extrabold text-white">2,000+</div>
+          <div class="text-[11px] font-mono text-slate-400 mt-0.5">CVs Screened / Wk</div>
         </div>
-        <h2 class="text-white font-bold text-lg">Rumman Hossain</h2>
-        <p class="text-xs font-mono text-slate-400 mt-0.5">South Banasree, Dhaka, BD[cite: 1]</p>
-        <div class="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-          <i class="fa-solid fa-circle-check text-[10px]"></i> Active in People Ops
+        <div class="glass-card p-4 rounded-2xl">
+          <div class="text-xl font-extrabold text-teal-400">HRaaS</div>
+          <div class="text-[11px] font-mono text-slate-400 mt-0.5">Talent Operations</div>
         </div>
-      </div>
-
-    </section>
-
-    <!-- Key Metrics Grid -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="bento-card p-5 rounded-2xl">
-        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Weekly Sourcing</div>
-        <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2">2,000+</div>
-        <div class="text-xs text-teal-400 mt-1">CVs Screened / Wk[cite: 1]</div>
-      </div>
-      <div class="bento-card p-5 rounded-2xl">
-        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Current Focus</div>
-        <div class="text-2xl sm:text-3xl font-extrabold text-teal-400 mt-2">HRaaS</div>
-        <div class="text-xs text-slate-400 mt-1">HR Operations & Sourcing</div>
-      </div>
-      <div class="bento-card p-5 rounded-2xl">
-        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Highest Degree</div>
-        <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Master's</div>
-        <div class="text-xs text-teal-400 mt-1">HRM · Dhaka Univ.[cite: 1]</div>
-      </div>
-      <div class="bento-card p-5 rounded-2xl">
-        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Specialized</div>
-        <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2">PGDHRM</div>
-        <div class="text-xs text-slate-400 mt-1">United Int. Univ.[cite: 1]</div>
-      </div>
-    </section>
-
-    <!-- Experience Timeline -->
-    <section id="experience" class="space-y-6">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
-        <div>
-          <h2 class="text-2xl font-bold text-white">Work Experience</h2>
-          <p class="text-xs font-mono text-slate-400 mt-0.5">Corporate operations and talent acquisition track record</p>
+        <div class="glass-card p-4 rounded-2xl">
+          <div class="text-xl font-extrabold text-white">Master's</div>
+          <div class="text-[11px] font-mono text-slate-400 mt-0.5">HRM @ DU</div>
+        </div>
+        <div class="glass-card p-4 rounded-2xl">
+          <div class="text-xl font-extrabold text-teal-400">PGDHRM</div>
+          <div class="text-[11px] font-mono text-slate-400 mt-0.5">United Int. Univ.</div>
         </div>
       </div>
+    </div>
 
-      <div class="space-y-4">
-        
-        <!-- Job 1: WHOSWHO -->
-        <div class="bento-card p-6 sm:p-7 rounded-3xl border-teal-500/30">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-            <div>
-              <div class="flex items-center gap-2">
-                <h3 class="text-lg font-bold text-white">Trainee Executive – HR Operations</h3>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 font-semibold border border-teal-500/30">Active</span>
-              </div>
-              <div class="text-xs font-medium text-teal-400 mt-0.5">WHOSWHO (HRaaS) · Dhaka, Bangladesh</div>
-            </div>
-            <span class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1 rounded-full self-start sm:self-center">Nov. 2026 – Present</span>
-          </div>
-          <ul class="space-y-2 text-sm text-slate-300">
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-teal-400 text-xs mt-1"></i>
-              <span>Spearhead targeted talent acquisition and headhunting pipelines to source key talent for partner organizations.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-teal-400 text-xs mt-1"></i>
-              <span>Assist in core HR policy drafting, documentation, and operational compliance standardizations across client accounts.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-teal-400 text-xs mt-1"></i>
-              <span>Manage the end-to-end employee lifecycle, coordinating structured onboarding processes, candidate verifications, and offboarding workflows.</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Job 2: Enroute -->
-        <div class="bento-card p-6 rounded-3xl">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-            <div>
-              <h3 class="text-base font-bold text-white">Intern HR</h3>
-              <div class="text-xs text-slate-400">Enroute International Ltd. · Dhaka[cite: 1]</div>
-            </div>
-            <span class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1 rounded-full self-start sm:self-center">Apr. 2026 – June 2026[cite: 1]</span>
-          </div>
-          <ul class="space-y-1.5 text-xs sm:text-sm text-slate-300">
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Screened and shortlisted 2000+ CVs weekly against targeted job specifications[cite: 1].</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Sourced passive candidates for key roles using strategic headhunting techniques[cite: 1].</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Coordinated talent management workflows, candidate screening, and interview schedules[cite: 1].</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Job 3: Triotect -->
-        <div class="bento-card p-6 rounded-3xl">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-            <div>
-              <h3 class="text-base font-bold text-white">Administrative Service Manager</h3>
-              <div class="text-xs text-slate-400">Triotect & Associates Ltd. · Dhaka[cite: 1]</div>
-            </div>
-            <span class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1 rounded-full self-start sm:self-center">Sep. 2024 – Sep. 2025[cite: 1]</span>
-          </div>
-          <ul class="space-y-1.5 text-xs sm:text-sm text-slate-300">
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Supervised daily admin work and monitored team tasks across operational divisions[cite: 1].</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Managed facilities, vendor contracts, and office maintenance requisitions[cite: 1].</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Maintained documents and records updated for internal audit and daily operations[cite: 1].</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Job 4: UCB -->
-        <div class="bento-card p-6 rounded-3xl">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-            <div>
-              <h3 class="text-base font-bold text-white">Intern - Administrative Support</h3>
-              <div class="text-xs text-slate-400">United Commercial Bank (UCB) PLC · Dhaka[cite: 1]</div>
-            </div>
-            <span class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1 rounded-full self-start sm:self-center">Jun. 2024 – Aug. 2024[cite: 1]</span>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Resolved frontline customer queries, provided CRM data inputs supporting service-quality assessments, and assisted with branch client support[cite: 1].
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Education & Skills Grid -->
-    <section id="credentials" class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <!-- PAGE 2: EXPERIENCE -->
+    <div id="tab-experience" class="tab-content space-y-4">
       
-      <!-- Education Timeline -->
-      <div class="md:col-span-6 bento-card p-7 rounded-3xl space-y-5">
-        <h3 class="text-lg font-bold text-white border-b border-white/10 pb-3">Education History</h3>
+      <!-- Current Role -->
+      <div class="glass-card p-6 rounded-2xl border-teal-500/30 space-y-3">
+        <div class="flex flex-wrap justify-between items-start gap-2">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-base sm:text-lg font-bold text-white">Trainee Executive – HR Operations</h2>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 font-semibold border border-teal-500/30">Current</span>
+            </div>
+            <div class="text-xs text-teal-400 mt-0.5">WHOSWHO (HRaaS) · Dhaka, Bangladesh</div>
+          </div>
+          <span class="text-xs font-mono text-slate-400 bg-white/5 px-2.5 py-1 rounded-full">Nov. 2026 – Present</span>
+        </div>
+        <ul class="space-y-1.5 text-xs sm:text-sm text-slate-300 list-disc list-inside">
+          <li>Drive strategic talent acquisition and proactive headhunting pipelines for client companies.</li>
+          <li>Formulate core HR policies, SOP documentation, and compliance frameworks.</li>
+          <li>Oversee the employee lifecycle, from onboarding to verification and offboarding.</li>
+        </ul>
+      </div>
+
+      <!-- Enroute -->
+      <div class="glass-card p-6 rounded-2xl space-y-3">
+        <div class="flex flex-wrap justify-between items-start gap-2">
+          <div>
+            <h2 class="text-base font-bold text-white">Intern HR</h2>
+            <div class="text-xs text-slate-400 mt-0.5">Enroute International Ltd. · Dhaka</div>
+          </div>
+          <span class="text-xs font-mono text-slate-400 bg-white/5 px-2.5 py-1 rounded-full">Apr. 2026 – June 2026</span>
+        </div>
+        <ul class="space-y-1.5 text-xs sm:text-sm text-slate-300 list-disc list-inside">
+          <li>Screened and shortlisted 2000+ CVs weekly against role-specific requirements.</li>
+          <li>Sourced passive talent using Boolean search and targeted headhunting techniques.</li>
+          <li>Coordinated interview scheduling and candidate pipeline communication.</li>
+        </ul>
+      </div>
+
+      <!-- Triotect -->
+      <div class="glass-card p-6 rounded-2xl space-y-3">
+        <div class="flex flex-wrap justify-between items-start gap-2">
+          <div>
+            <h2 class="text-base font-bold text-white">Administrative Service Manager</h2>
+            <div class="text-xs text-slate-400 mt-0.5">Triotect & Associates Ltd. · Dhaka</div>
+          </div>
+          <span class="text-xs font-mono text-slate-400 bg-white/5 px-2.5 py-1 rounded-full">Sep. 2024 – Sep. 2025</span>
+        </div>
+        <ul class="space-y-1.5 text-xs sm:text-sm text-slate-300 list-disc list-inside">
+          <li>Supervised office operations, staff tasks, and administrative compliance.</li>
+          <li>Managed vendor relationships, facilities, and maintenance requisitions.</li>
+        </ul>
+      </div>
+
+      <!-- UCB -->
+      <div class="glass-card p-6 rounded-2xl space-y-3">
+        <div class="flex flex-wrap justify-between items-start gap-2">
+          <div>
+            <h2 class="text-base font-bold text-white">Intern - Administrative Support</h2>
+            <div class="text-xs text-slate-400 mt-0.5">United Commercial Bank (UCB) PLC · Dhaka</div>
+          </div>
+          <span class="text-xs font-mono text-slate-400 bg-white/5 px-2.5 py-1 rounded-full">Jun. 2024 – Aug. 2024</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-300">
+          Handled frontline inquiries, recorded CRM service inputs, and supported customer service delivery.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- PAGE 3: EDUCATION & CREDENTIALS -->
+    <div id="tab-education" class="tab-content space-y-4">
+      <div class="glass-card p-6 rounded-2xl space-y-4">
+        <h2 class="text-base font-bold text-white border-b border-white/10 pb-2">Academic Background</h2>
         
-        <div class="space-y-4">
-          <div class="relative pl-5 border-l-2 border-teal-500">
-            <span class="text-xs font-mono text-teal-400">2026 – Present[cite: 1]</span>
-            <div class="text-sm font-bold text-white">Masters in Human Resource Management</div>
-            <div class="text-xs text-slate-400">University of Dhaka[cite: 1]</div>
+        <div class="space-y-3 text-sm">
+          <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+            <span class="text-xs font-mono text-teal-400">2026 – Present</span>
+            <div class="font-bold text-white">Masters in Human Resource Management</div>
+            <div class="text-xs text-slate-400">University of Dhaka</div>
           </div>
-          <div class="relative pl-5 border-l-2 border-slate-700">
-            <span class="text-xs font-mono text-slate-400">2026[cite: 1]</span>
-            <div class="text-sm font-bold text-white">Post Graduate Diploma in HRM (PGDHRM)[cite: 1]</div>
-            <div class="text-xs text-slate-400">United International University[cite: 1]</div>
+          <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+            <span class="text-xs font-mono text-slate-400">2026</span>
+            <div class="font-bold text-white">Post Graduate Diploma in HRM (PGDHRM)</div>
+            <div class="text-xs text-slate-400">United International University</div>
           </div>
-          <div class="relative pl-5 border-l-2 border-slate-700">
-            <span class="text-xs font-mono text-slate-400">2024[cite: 1]</span>
-            <div class="text-sm font-bold text-white">BBA in Marketing[cite: 1]</div>
-            <div class="text-xs text-slate-400">Ahsanullah University of Science and Technology[cite: 1]</div>
-          </div>
-          <div class="relative pl-5 border-l-2 border-slate-700">
-            <span class="text-xs font-mono text-slate-400">2019 & 2017[cite: 1]</span>
-            <div class="text-sm font-bold text-white">HSC & SSC (Science)[cite: 1]</div>
-            <div class="text-xs text-slate-400">BAF Shaheen College & Ideal School & College[cite: 1]</div>
+          <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+            <span class="text-xs font-mono text-slate-400">2024</span>
+            <div class="font-bold text-white">Bachelor of Business Administration (Marketing)</div>
+            <div class="text-xs text-slate-400">Ahsanullah University of Science and Technology</div>
           </div>
         </div>
       </div>
 
-      <!-- Skills & Tool Box -->
-      <div id="skills" class="md:col-span-6 bento-card p-7 rounded-3xl space-y-5 flex flex-col justify-between">
+      <!-- Certifications -->
+      <div class="glass-card p-6 rounded-2xl space-y-3">
+        <h2 class="text-base font-bold text-white border-b border-white/10 pb-2">Certifications & Training</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-300">
+          <div class="p-3 rounded-xl bg-white/5 flex items-center gap-2.5">
+            <i class="fa-solid fa-award text-teal-400 text-sm"></i>
+            <span>FBHRO: AI & Human Capital in Agility</span>
+          </div>
+          <div class="p-3 rounded-xl bg-white/5 flex items-center gap-2.5">
+            <i class="fa-solid fa-graduation-cap text-teal-400 text-sm"></i>
+            <span>Coursera: Recruiting & Onboarding</span>
+          </div>
+          <div class="p-3 rounded-xl bg-white/5 flex items-center gap-2.5">
+            <i class="fa-solid fa-laptop-code text-teal-400 text-sm"></i>
+            <span>AUST: Tally Prime Release 4.0</span>
+          </div>
+          <div class="p-3 rounded-xl bg-white/5 flex items-center gap-2.5">
+            <i class="fa-solid fa-pen-nib text-teal-400 text-sm"></i>
+            <span>IEEE AIUB: Digital Workshop</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: SKILLS & TOOLS -->
+    <div id="tab-skills" class="tab-content space-y-4">
+      <div class="glass-card p-6 rounded-2xl space-y-4">
+        <h2 class="text-base font-bold text-white border-b border-white/10 pb-2">Core HR Expertise</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-200">Talent Acquisition</span>
+          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-200">Headhunting</span>
+          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-200">HR Policy Drafting</span>
+          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-200">Onboarding & Offboarding</span>
+          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-200">Leave & Attendance Tracking</span>
+          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-200">Employee Records</span>
+          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-200">Vendor Management</span>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-2xl space-y-4">
+        <h2 class="text-base font-bold text-white border-b border-white/10 pb-2">Software & Technical Stack</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-xs text-teal-300 font-mono">Microsoft Office</span>
+          <span class="px-3 py-1.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-xs text-teal-300 font-mono">Google Workspace</span>
+          <span class="px-3 py-1.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-xs text-teal-300 font-mono">Power BI</span>
+          <span class="px-3 py-1.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-xs text-teal-300 font-mono">TallyPrime</span>
+          <span class="px-3 py-1.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-xs text-teal-300 font-mono">HRIS Tools</span>
+          <span class="px-3 py-1.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-xs text-teal-300 font-mono">Adobe Photoshop</span>
+          <span class="px-3 py-1.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-xs text-teal-300 font-mono">ChatGPT & Gemini</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 5: CONTACT & CHANNELS -->
+    <div id="tab-contact" class="tab-content space-y-4">
+      <div class="glass-card p-6 sm:p-8 rounded-3xl space-y-6">
         <div>
-          <h3 class="text-lg font-bold text-white border-b border-white/10 pb-3">Competencies & Toolset</h3>
-          
-          <div class="mt-4 space-y-3">
-            <div>
-              <span class="text-xs font-mono text-teal-400 block mb-2">Core HR Disciplines</span>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300">Talent Acquisition</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300">Headhunting</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300">Policy Development</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300">Onboarding & Offboarding</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300">Leave Tracking[cite: 1]</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300">Documentation Control[cite: 1]</span>
-              </div>
-            </div>
-
-            <div class="pt-2">
-              <span class="text-xs font-mono text-cyan-400 block mb-2">Technical & Software</span>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-teal-300 font-mono">Microsoft Office[cite: 1]</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-teal-300 font-mono">Google Workspace[cite: 1]</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-teal-300 font-mono">Power BI[cite: 1]</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-teal-300 font-mono">TallyPrime[cite: 1]</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-teal-300 font-mono">Adobe Photoshop[cite: 1]</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-teal-300 font-mono">ChatGPT & Gemini[cite: 1]</span>
-              </div>
-            </div>
-          </div>
+          <span class="text-xs font-mono text-teal-400 uppercase tracking-widest">Direct Contact</span>
+          <h2 class="text-2xl font-bold text-white mt-1">Get in touch directly</h2>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">Available for HR operations, talent acquisition advisory, and mandates.</p>
         </div>
 
-        <div class="p-3.5 rounded-xl bg-teal-500/10 border border-teal-500/20 text-xs text-slate-300 flex items-center gap-3">
-          <i class="fa-solid fa-award text-teal-400 text-lg"></i>
-          <span>FBHRO Certified: AI & Human Capital Driving Business Agility[cite: 1]</span>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Contact & Direct Channels -->
-    <section id="contact" class="bento-card p-8 rounded-3xl border-teal-500/20">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        
-        <div class="md:col-span-6 space-y-4">
-          <span class="text-xs font-mono text-teal-400 uppercase tracking-widest">Connect Directly</span>
-          <h2 class="text-3xl font-bold text-white">Let's discuss HR operations & hiring.</h2>
-          <p class="text-sm text-slate-400 leading-relaxed">
-            Feel free to reach out via WhatsApp, email, or LinkedIn for operational collaborations, talent mandates, or professional inquiries.
-          </p>
-
-          <div class="space-y-2.5 pt-2 text-sm">
-            <div class="flex items-center gap-3 text-slate-300">
-              <span class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-teal-400"><i class="fa-solid fa-location-dot"></i></span>
-              <span>South Banasree, Dhaka, Bangladesh[cite: 1]</span>
-            </div>
-            <div class="flex items-center gap-3 text-slate-300">
-              <span class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-teal-400"><i class="fa-solid fa-envelope"></i></span>
-              <a href="mailto:plabonsweb@gmail.com" class="hover:text-teal-400 transition">plabonsweb@gmail.com[cite: 1]</a>
-            </div>
-            <div class="flex items-center gap-3 text-slate-300">
-              <span class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-teal-400"><i class="fa-solid fa-phone"></i></span>
-              <a href="tel:+8801714008484" class="hover:text-teal-400 transition">+88 01714008484[cite: 1]</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Direct Connect Buttons -->
-        <div class="md:col-span-6 bg-slate-950/60 p-6 rounded-2xl border border-white/10 space-y-3.5">
-          
-          <!-- WhatsApp Contact Button -->
-          <a href="https://wa.me/8801711377620" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 transition group">
-            <div class="flex items-center gap-3.5">
-              <div class="w-11 h-11 rounded-xl bg-emerald-500 flex items-center justify-center text-black font-bold text-xl">
+        <div class="space-y-3">
+          <!-- WhatsApp -->
+          <a href="https://wa.me/8801711377620" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-2xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 transition group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-black font-bold text-lg">
                 <i class="fa-brands fa-whatsapp"></i>
               </div>
               <div>
-                <div class="text-xs font-mono text-emerald-400">WhatsApp Number</div>
+                <div class="text-[11px] font-mono text-emerald-400">WhatsApp</div>
                 <div class="text-sm font-bold text-white">+88 01711377620</div>
               </div>
             </div>
-            <span class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-500 text-black group-hover:translate-x-1 transition-transform">
-              Chat Now <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
-            </span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-lg bg-emerald-500 text-black">Chat</span>
           </a>
 
-          <!-- LinkedIn Contact Button -->
-          <a href="https://www.linkedin.com/in/rumman-hossain-bba2a71a2/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 transition group">
-            <div class="flex items-center gap-3.5">
-              <div class="w-11 h-11 rounded-xl bg-blue-500 flex items-center justify-center text-white font-bold text-xl">
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/rumman-hossain-bba2a71a2/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-2xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 transition group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center text-white font-bold text-lg">
                 <i class="fa-brands fa-linkedin-in"></i>
               </div>
               <div>
-                <div class="text-xs font-mono text-blue-400">Verified Profile</div>
-                <div class="text-sm font-bold text-white">LinkedIn Network</div>
+                <div class="text-[11px] font-mono text-blue-400">LinkedIn</div>
+                <div class="text-sm font-bold text-white">Rumman Hossain</div>
               </div>
             </div>
-            <span class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-blue-500 text-white group-hover:translate-x-1 transition-transform">
-              Connect <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
-            </span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-lg bg-blue-500 text-white">Connect</span>
           </a>
 
-          <!-- Download CV Button -->
-          <a href="resume.pdf" download="Md_Rumman_Hossain_Resume.pdf" class="flex items-center justify-between p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 transition group">
-            <div class="flex items-center gap-3.5">
-              <div class="w-11 h-11 rounded-xl bg-teal-500 flex items-center justify-center text-black font-bold text-xl">
+          <!-- Resume 1-Click Download -->
+          <a href="resume.pdf" download="Md_Rumman_Hossain_Resume.pdf" class="flex items-center justify-between p-4 rounded-2xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 transition group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center text-black font-bold text-lg">
                 <i class="fa-solid fa-file-pdf"></i>
               </div>
               <div>
-                <div class="text-xs font-mono text-teal-400">Official Curriculum Vitae</div>
+                <div class="text-[11px] font-mono text-teal-400">Curriculum Vitae</div>
                 <div class="text-sm font-bold text-white">Download Resume (PDF)</div>
               </div>
             </div>
-            <span class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-teal-500 text-black group-hover:translate-x-1 transition-transform">
-              1-Click <i class="fa-solid fa-download ml-1 text-[10px]"></i>
-            </span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-lg bg-teal-500 text-black">1-Click</span>
           </a>
 
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="text-center py-8 border-t border-white/5 text-xs font-mono text-slate-500">
-    © 2026 MD. Rumman Hossain · Built with HTML, Tailwind CSS & Bento Glass Design
-  </footer>
-
-</body>
-</html>
+          <!-- Email & Phone Details -->
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/5 text-xs sm:text-sm space-y-2 text-slate-300">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-envelope text-teal-400 w-4"></i>
+              <a href="mailto:plabonsweb@gmail.com" class="hover:text-teal-400">plabonsweb@gmail.com</a>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-phone text-teal-400 w-4"></i>
+              <a href="tel:
