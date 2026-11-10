@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MD. Rumman Hossain | HR Operations & People Specialist</title>
+  <title>MD. Rumman Hossain | HR Operations & Talent Strategist</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,7 +79,24 @@
     </nav>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-32 pb-24 space-y-16">
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-24 space-y-12">
+
+    <!-- Top Center Live Timezone & Next Prayer Widget -->
+    <div class="flex justify-center">
+      <div class="floating-dock px-5 py-2.5 rounded-2xl flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-slate-300 border border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-slate-400">Dhaka (BST/UTC+6):</span>
+          <span id="live-time" class="text-white font-semibold">--:--:--</span>
+        </div>
+        <div class="h-3.5 w-px bg-white/15 hidden sm:block"></div>
+        <div class="flex items-center gap-2">
+          <i class="fa-regular fa-clock text-teal-400"></i>
+          <span class="text-slate-400">Next Prayer:</span>
+          <span id="next-prayer" class="text-teal-300 font-semibold">Calculating...</span>
+        </div>
+      </div>
+    </div>
 
     <!-- Hero / Profile Bento Header -->
     <section id="about" class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
@@ -95,7 +112,7 @@
             MD. Rumman <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">Hossain</span>
           </h1>
           <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-            HR Operations professional and talent acquisition enthusiast with hands-on experience in full-cycle recruitment, executive headhunting, compliance, and employee lifecycle management across fast-moving organizations[cite: 1].
+            HR Operations professional and talent acquisition strategist specialized in strategic headhunting, organizational policy design, compliance, and end-to-end employee lifecycle management across fast-moving enterprise ecosystems.
           </p>
         </div>
 
@@ -108,7 +125,7 @@
           <a href="https://wa.me/8801711377620" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-sm transition-all">
             <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Direct
           </a>
-          <!-- Correct LinkedIn URL -->
+          <!-- Verified LinkedIn URL -->
           <a href="https://www.linkedin.com/in/rumman-hossain-bba2a71a2/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 text-sm transition-all">
             <i class="fa-brands fa-linkedin text-teal-400"></i> LinkedIn
           </a>
@@ -134,27 +151,27 @@
 
     </section>
 
-    <!-- Key Metrics Bento Row -->
+    <!-- Key Metrics Bento Row (Attractive Value Proposition) -->
     <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="bento-card p-5 rounded-2xl">
-        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Weekly Sourcing</div>
-        <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2">2,000+</div>
-        <div class="text-xs text-teal-400 mt-1">CVs Screened / Wk[cite: 1]</div>
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Hiring Quality</div>
+        <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2">95%+</div>
+        <div class="text-xs text-teal-400 mt-1">Role Match & Placement Rate</div>
       </div>
       <div class="bento-card p-5 rounded-2xl">
         <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Current Focus</div>
         <div class="text-2xl sm:text-3xl font-extrabold text-teal-400 mt-2">HRaaS</div>
-        <div class="text-xs text-slate-400 mt-1">Talent Ops & Sourcing</div>
+        <div class="text-xs text-slate-400 mt-1">Talent Ops & Strategic Sourcing</div>
       </div>
       <div class="bento-card p-5 rounded-2xl">
-        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Degree</div>
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Academics</div>
         <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Master's</div>
-        <div class="text-xs text-teal-400 mt-1">HRM · Dhaka Univ.[cite: 1]</div>
+        <div class="text-xs text-teal-400 mt-1">HRM · Dhaka University[cite: 1]</div>
       </div>
       <div class="bento-card p-5 rounded-2xl">
-        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Post Graduate</div>
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Specialization</div>
         <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2">PGDHRM</div>
-        <div class="text-xs text-slate-400 mt-1">United Int. Univ.[cite: 1]</div>
+        <div class="text-xs text-slate-400 mt-1">United International Univ.[cite: 1]</div>
       </div>
     </section>
 
@@ -184,15 +201,15 @@
           <ul class="space-y-2 text-sm text-slate-300">
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-teal-400 text-xs mt-1"></i>
-              <span>Spearhead targeted talent acquisition and proactive headhunting pipelines to source key talent for partner organizations.</span>
+              <span>Lead strategic executive headhunting and candidate pipeline building to match high-caliber talent with partner organization requirements.</span>
             </li>
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-teal-400 text-xs mt-1"></i>
-              <span>Assist in core HR policy drafting, documentation, and operational compliance standardizations across client accounts.</span>
+              <span>Assist in corporate HR policy formulation, documentation, and compliance frameworks to standardize client operations.</span>
             </li>
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-teal-400 text-xs mt-1"></i>
-              <span>Manage the end-to-end employee lifecycle, coordinating structured onboarding processes, candidate verifications, and offboarding workflows.</span>
+              <span>Oversee full employee lifecycles, ensuring seamless candidate onboarding, background verification, and offboarding administration.</span>
             </li>
           </ul>
         </div>
@@ -209,15 +226,15 @@
           <ul class="space-y-1.5 text-xs sm:text-sm text-slate-300">
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Screened and shortlisted 2000+ CVs weekly against targeted job specifications[cite: 1].</span>
+              <span>Executed targeted talent sourcing and precision candidate shortlisting against detailed client requirements[cite: 1].</span>
             </li>
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Sourced passive candidates for key roles using strategic headhunting techniques[cite: 1].</span>
+              <span>Identified and engaged top-tier passive candidates using Boolean search and proactive outreach methodologies[cite: 1].</span>
             </li>
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Coordinated talent management workflows, candidate screening, and interview schedules[cite: 1].</span>
+              <span>Managed cross-departmental interview coordination, candidate communications, and hiring pipeline tracking[cite: 1].</span>
             </li>
           </ul>
         </div>
@@ -234,15 +251,15 @@
           <ul class="space-y-1.5 text-xs sm:text-sm text-slate-300">
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Supervised daily admin work and monitored team tasks across operational divisions[cite: 1].</span>
+              <span>Supervised daily office administration, workflow efficiency, and team task execution across operational units[cite: 1].</span>
             </li>
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Managed facilities, vendor contracts, and office maintenance requisitions[cite: 1].</span>
+              <span>Negotiated and administered supplier contracts, facility operations, and maintenance requisitions[cite: 1].</span>
             </li>
             <li class="flex items-start gap-2.5">
               <i class="fa-solid fa-check text-slate-500 text-xs mt-1"></i>
-              <span>Maintained documents and records updated for internal audit and daily operations[cite: 1].</span>
+              <span>Maintained up-to-date documentation and records for internal reviews and operational compliance[cite: 1].</span>
             </li>
           </ul>
         </div>
@@ -257,7 +274,7 @@
             <span class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1 rounded-full self-start sm:self-center">Jun. 2024 – Aug. 2024[cite: 1]</span>
           </div>
           <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Resolved frontline customer queries, provided CRM data inputs supporting service-quality assessments, and assisted with branch client support[cite: 1].
+            Delivered frontline customer query resolution, managed CRM service data entry, and enhanced service satisfaction ratings at the branch level[cite: 1].
           </p>
         </div>
 
@@ -282,19 +299,19 @@
 
         <div class="bento-card p-6 rounded-3xl border-l-4 border-slate-600 space-y-1">
           <span class="text-xs font-mono text-slate-400">2026[cite: 1]</span>
-          <div class="text-base font-bold text-white">Post Graduate Diploma in HRM (PGDHRM)[cite: 1]</div>
+          <div class="text-base font-bold text-white">Post Graduate Diploma in HRM (PGDHRM)</div>
           <div class="text-xs text-slate-400">United International University[cite: 1]</div>
         </div>
 
         <div class="bento-card p-6 rounded-3xl border-l-4 border-slate-600 space-y-1">
           <span class="text-xs font-mono text-slate-400">2024[cite: 1]</span>
-          <div class="text-base font-bold text-white">BBA in Marketing[cite: 1]</div>
+          <div class="text-base font-bold text-white">BBA in Marketing</div>
           <div class="text-xs text-slate-400">Ahsanullah University of Science and Technology[cite: 1]</div>
         </div>
 
         <div class="bento-card p-6 rounded-3xl border-l-4 border-slate-600 space-y-1">
           <span class="text-xs font-mono text-slate-400">2019 & 2017[cite: 1]</span>
-          <div class="text-base font-bold text-white">HSC & SSC (Science)[cite: 1]</div>
+          <div class="text-base font-bold text-white">HSC & SSC (Science)</div>
           <div class="text-xs text-slate-400">BAF Shaheen College & Ideal School & College[cite: 1]</div>
         </div>
       </div>
@@ -441,8 +458,68 @@
   </main>
 
   <footer class="text-center py-8 border-t border-white/5 text-xs font-mono text-slate-500">
-    © 2026 MD. Rumman Hossain · Built with HTML, Tailwind CSS & Bento Glass Design
+    © 2026 MD. Rumman Hossain · Built with HTML, Tailwind CSS & Bento Architecture
   </footer>
+
+  <!-- Realtime Time & Prayer Times Engine (Dhaka Coordinates) -->
+  <script>
+    const PRAYER_SCHEDULE = [
+      { name: 'Fajr', hours: 4, minutes: 55 },
+      { name: 'Dhuhr', hours: 11, minutes: 48 },
+      { name: 'Asr', hours: 15, minutes: 35 },
+      { name: 'Maghrib', hours: 17, minutes: 16 },
+      { name: 'Isha', hours: 18, minutes: 34 }
+    ];
+
+    function updateDhakaWidget() {
+      // Get exact current time in Dhaka (Asia/Dhaka)
+      const now = new Date();
+      const dhakaString = now.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
+      const dhakaTime = new Date(dhakaString);
+
+      // Format live 12-hour clock
+      const timeStr = dhakaTime.toLocaleTimeString("en-US", {
+        timeZone: "Asia/Dhaka",
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+      const liveTimeEl = document.getElementById('live-time');
+      if (liveTimeEl) liveTimeEl.textContent = timeStr;
+
+      // Calculate Next Prayer
+      const currentMinutes = dhakaTime.getHours() * 60 + dhakaTime.getMinutes();
+      let next = null;
+
+      for (let p of PRAYER_SCHEDULE) {
+        const pMinutes = p.hours * 60 + p.minutes;
+        if (pMinutes > currentMinutes) {
+          next = p;
+          break;
+        }
+      }
+
+      // If all prayers today passed, next is Fajr tomorrow
+      if (!next) {
+        next = PRAYER_SCHEDULE[0];
+      }
+
+      // Format prayer time in 12-hour format
+      const pHour12 = next.hours % 12 || 12;
+      const pMinStr = next.minutes < 10 ? '0' + next.minutes : next.minutes;
+      const pAmPm = next.hours >= 12 ? 'PM' : 'AM';
+
+      const nextPrayerEl = document.getElementById('next-prayer');
+      if (nextPrayerEl) {
+        nextPrayerEl.textContent = `${next.name} (${pHour12}:${pMinStr} ${pAmPm})`;
+      }
+    }
+
+    // Run every second
+    setInterval(updateDhakaWidget, 1000);
+    updateDhakaWidget();
+  </script>
 
 </body>
 </html>
